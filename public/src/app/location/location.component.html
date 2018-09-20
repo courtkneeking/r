@@ -1,0 +1,74 @@
+<body>
+    <div id = "body">
+        <div id = "map">
+            <agm-map [latitude]= "marker_one.lat" [longitude]= "marker_one.lng" [zoom] = "map.zoom">
+            <agm-marker (dragEnd) = "stopMarker($event, this.marker_one)" 
+                [latitude]= "marker_one.lat" 
+                [longitude]= "marker_one.lng" 
+                [markerDraggable] = "marker_one.draggable"
+                [iconUrl]= "marker_one.iconUrl">
+            </agm-marker>
+            <div *ngIf= "place.received == true">
+                <agm-marker
+                    [latitude]= "place.lat" 
+                    [longitude]= "place.lng">
+                </agm-marker>
+            </div>
+            </agm-map>
+        </div>
+        <p id = "location"></p>
+        <div id = "header" >Randomizer</div>
+        <div id = "left">  
+            <div *ngIf= "place.received == false">
+                <div id = "inputs">
+                    <div class = "swing-in-left-bck" id = "type">
+                        <div class="form-group">
+                            Place type: 
+                            <select [(ngModel)]="input.type" name = "input.type" (change) = "showRadius()">
+                                <option value="" disabled selected>select</option>
+                                <option>bar</option>
+                                <option>bus_station</option>
+                                <option>bakery</option>
+                                <option>cafe</option>
+                                <option>clothing store</option>
+                                <option>museum</option>
+                                <option>park</option>
+                                <option>restaurant</option>
+                                <option>night_club </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div *ngIf= "input.intro  > 0" id = "radius" class = "swing-in-right-bck">
+                        <div class="form-group">
+                            Distance: 
+                            <input type = "number" min = "100" max = "5000" step = "100" [(ngModel)]="input.radius" name = "input.radius" (change) = "showButton()" placeholder = {{input.radius}}>
+                            <span style = "font-style: oblique">meters</span>
+                        </div>
+                    </div>
+                </div>
+                <div id = "randomize" *ngIf= "input.intro > 1">
+                    <button id = "randomize_button" (click) = "getPlaces()">
+                        Randomize
+                    </button> 
+                </div>
+            </div>
+            <div *ngIf= "place.received == true">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                        <img class="media-object" src= {{place.icon}} alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{place.name}}</h4>
+                          {{place.vicinity}}<br>
+                        <button id = "go_button" (click) = "getDirections()">Go</button>  <button id = "try_again_button" (click) = "tryAgain()">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+   

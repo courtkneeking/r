@@ -1,0 +1,13 @@
+agm-map {
+    height: 300px;
+    width: 400px;
+}
+button {
+    background-color: yellow;
+}
+#submit_location{
+    display: inline-block;
+}
+#current_location{
+    display: inline-block;
+}
