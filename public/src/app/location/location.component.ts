@@ -196,6 +196,7 @@ export class LocationComponent implements OnInit {
     this.input.type= ''
   }
   getDirections(){
+    window.location.href = 'https://www.google.com/maps/dir/?api=1&origin='+this.marker_one.lat+','+this.marker_one.lng+'&destination='+this.place.lat+','+this.place.lng+'&travelmode=walking';
   }
   showRadius(){
     this.input.intro = 1;
