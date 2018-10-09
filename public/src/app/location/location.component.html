@@ -1,24 +1,6 @@
 <body>
     <div id = "body">
-        <div id = "map">
-            <agm-map [latitude]= "marker_one.lat" [longitude]= "marker_one.lng" [zoom] = "map.zoom">
-            <agm-marker (dragEnd) = "stopMarker($event, this.marker_one)" 
-                [latitude]= "marker_one.lat" 
-                [longitude]= "marker_one.lng" 
-                [markerDraggable] = "marker_one.draggable"
-                [iconUrl]= "marker_one.iconUrl">
-            </agm-marker>
-            <div *ngIf= "place.received == true">
-                <agm-marker
-                    [latitude]= "place.lat" 
-                    [longitude]= "place.lng">
-                </agm-marker>
-            </div>
-            </agm-map>
-        </div>
-        <p id = "location"></p>
-        <div id = "header" >Randomizer</div>
-        <div id = "left">  
+                <div id = "left">  
             <div *ngIf= "place.received == false">
                 <div id = "inputs">
                     <div class = "swing-in-left-bck" id = "type">
@@ -67,6 +49,25 @@
                 </div>
             </div>
         </div>
+        <div id = "map">
+            <agm-map [latitude]= "marker_one.lat" [longitude]= "marker_one.lng" [zoom] = "map.zoom">
+            <agm-marker (dragEnd) = "stopMarker($event, this.marker_one)" 
+                [latitude]= "marker_one.lat" 
+                [longitude]= "marker_one.lng" 
+                [markerDraggable] = "marker_one.draggable"
+                [iconUrl]= "marker_one.iconUrl">
+            </agm-marker>
+            <div *ngIf= "place.received == true">
+                <agm-marker
+                    [latitude]= "place.lat" 
+                    [longitude]= "place.lng">
+                </agm-marker>
+            </div>
+            </agm-map>
+        </div>
+        <p id = "location"></p>
+        <div id = "header" >Randomizer</div>
+
     </div>
 </body>
 
