@@ -1,157 +1,111 @@
 @media only screen and (max-width: 480px){
-    #map{
-        position: absolute;
-        bottom: 1vh;
+    #main{
+        width: 100%;
+        font-size: 15px;
     }
     agm-map {
-        height: 75vh;
-        width: 98vw;
-        margin-left: 1vw;
-        margin-top: 1vh;
+        height: 70vh;
+        width: 96vw;
     }
-    #left{
-        width: 98vw;
-        padding: 1vh 1vw 1vh 1vw;
-        font-size: 15px;
-        position: absolute;
-        height: 20vh;
-        top: 0.5vh;
-        opacity: 0.9;
-        /* margin: 2vh 10vw 0 10vw; */
-    }
-    #header{
-        font-weight: bold;
-        font-size: 30px;
-        position: absolute;
-        height: 8vh;
-        width: 98vw;
-        bottom: 0.5vh;
-        text-align: center;
-        opacity: 0.9;
-    }
-    #type{
-        margin-top: 3vh;
-        margin-left: 1vw;
-        width: 45vw;
-    }
-    #radius{
-        margin-bottom: 3vh;
-        width: 60%;
-        margin-left: 1vw;
-    }
-    #inputs {
-        width: 60%;
-        display: inline-block;
+    .inputs {
+        padding: 10px;
+        height: 18vh;
     }
     #randomize{
-        width: 25%;
-        position: absolute;
-        top: 8vh;
-        right: 10vw;
     }
     #randomize_button{
         background-color: black;
         color: white;
     }
-    #body{
-        opacity: 0.9;
-        
+    #logo{
+        font-size: 30px;
+        height: 10vh;
     }
 }
 @media only screen and (min-width: 481px) and (max-width: 1023px){
-    #map{
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        margin: 2vh 5vw;
-        position: absolute;
-        bottom: 2vh;
+    #main{
+        width: 100%;
+        font-size: 15px;
     }
     agm-map {
-        height: 75vh;
-        width: 90vw; 
+        height: 70vh;
+        width: 96vw;
     }
-    #left{
-        width: 90vw;
-        font-size: 15px;
-        margin: 2vh 5vw;
-        
-    }
-    #header{
-        font-weight: bold;
-        font-size: 45px;
-        margin-left: 30vw;
-    }
-    #type{
-        margin-top: 3vh;
-        width: 45vw;
-    }
-    #radius{
-        margin-bottom: 3vh;
-        width: 45vw;
-    }
-    #inputs {
-        width: 60%;
-        display: inline-block;
+    .inputs {
+        padding: 10px;
+        height: 18vh;
     }
     #randomize{
-        width: 25%;
-        display: inline-block;
-        vertical-align: top;
-        margin-top: 3vh;
     }
     #randomize_button{
         background-color: black;
         color: white;
-        height: 70px;
-        padding: 10px;
-        vertical-align: top;
     }
+    #logo{
+        font-size: 30px;
+        height: 10vh;
+    }
+
 }
 @media only screen and (min-width: 1024px){
-    #map{
-        display: inline-block;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        position: absolute;
-        right: 0.5vw;
+    #main{
+        width: 100%;
+        font-size: 15px;
     }
     agm-map {
-        height: 98vh;
-        width: 67vw; 
+        height: 70vh;
+        width: 96vw;
     }
-    #left{
-        width: 30vw;
-        display: inline-block;
-        vertical-align: top;
-        font-size: 15px;
-        padding: 1vh 1vw 1vh 1vw;
-
-    }
-    #header{
-        font-size: 7vh;
-        font-weight: bold;
-        margin-left: 2vw;
-    }
-    #type{
-        width: 25vw;
-        padding: 4vh 0 0 2vw; 
-    }
-    #radius{
-        width: 25vw;
-        padding: 2vh 0 0 2vw;
+    .inputs {
+        padding: 10px;
+        height: 18vh;
     }
     #randomize{
-        margin-left: 2vw;
     }
     #randomize_button{
         background-color: black;
         color: white;
-        height: 70px;
-        padding: 10px;
+    }
+    #logo{
+        font-size: 30px;
+        height: 10vh;
     }
 
 }
-#body{
+button{
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+input{
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+}
+select{
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+
+#shell{
     height: 98vh;
     width: 98vw;
+}
+#logo{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+#place {
+
+}
+#place_name{
+    font-size: 20px;
+}
+#place_info{
+    font-size: 10px;
 }
 #go_button {
     background-color: green;
@@ -162,32 +116,16 @@
     background-color: yellow;
     color: white;
 }
-button{
-    border: none;
-    border-radius: 5px;
-    padding: 3px 6px;
-    margin-top: 2%;
-}
-button:focus{
+
+select:focus{
     outline:none !important;
-}
-input{
-    border-radius: 5px;
-    border: none;
-    margin-right: 2px;
 }
 input:focus{
     outline:none !important;
 }
-select{
-    width: 50%;
-    display: inline-block;
-    border: none;
-}
-select:focus{
+button:focus{
     outline:none !important;
 }
-
 
 
 .swing-in-left-bck {

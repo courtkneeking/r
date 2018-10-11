@@ -112,9 +112,9 @@ export class LocationComponent implements OnInit {
 
   getRandomDesign(){
     var font = this.getFont();
-    $("#header").css("font-family" , font);
+    $("#logo").css("font-family" , font);
     var color = this.getColor();
-    $("#header").css("color" , color);
+    $("#logo").css("color" , color);
     $("body").css("color" , color);
     $("body").css("font-family" , font);
     $("body").css("border-left" , "0.5vw solid" + color);
@@ -124,11 +124,11 @@ export class LocationComponent implements OnInit {
     $("button").css("color" , color);
     this.random.color = color;
     var font_two = this.getFont();
-    $("#left").css("font-family" , font_two);
+    $("#main").css("font-family" , font_two);
     var color_two = this.getColor();
-    $("#left").css("background-color" , color_two);
-    $("#header").css("background-color" , color_two);
-    $("#body").css("background-color" , color_two);
+    $("#main").css("background-color" , color_two);
+    $("#logo").css("background-color" , color_two);
+    $("#shell").css("background-color" , color_two);
     var font_three = this.getFont();
     var color_three = this.getColor();
     $("option").css("color" , color_three);
@@ -165,7 +165,6 @@ export class LocationComponent implements OnInit {
     var location = "location="+this.marker_one.lat+","+this.marker_one.lng; 
     var radius = "&radius="+this.input.radius;
     var type = "&types="+this.input.type;
-    // this.random.url = base+location+radius+type+key;
     this.random.url = location+radius+type+key;
     var x = this._httpService.getPlaces(this.random.url)
     x.subscribe((data:any)=>{
@@ -173,7 +172,6 @@ export class LocationComponent implements OnInit {
       console.log('places: ',  this.random.places);
       this.getPlace();
     })
-    // this.getRandomDesign();
   }
   getPlace(){
     var number = this.random.places.results.length;
@@ -186,7 +184,8 @@ export class LocationComponent implements OnInit {
     this.place.lng = place.geometry.location.lng;
     this.place.vicinity = place.vicinity;
     this.place.rating = place.rating;    
-    console.log(place)
+    this.map.zoom = 12;
+    console.log('map zoom:', this.map.zoom)
   }
   tryAgain(){
     this.place.received = false;
