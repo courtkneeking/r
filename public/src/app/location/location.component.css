@@ -1,17 +1,10 @@
 @media only screen and (max-width: 480px){
     #main{
-        width: 100%;
         font-size: 15px;
     }
-    agm-map {
-        height: 70vh;
-        width: 96vw;
-    }
-    .inputs {
+    #inputs {
         padding: 10px;
         height: 18vh;
-    }
-    #randomize{
     }
     #randomize_button{
         background-color: black;
@@ -20,57 +13,115 @@
     #logo{
         font-size: 30px;
         height: 10vh;
+    }
+    #place {
+        padding: 10px;
+        height: 18vh;
+    }
+    #place_name{
+        font-size: 20px;
+    }
+    #place_info{
+        font-size: 10px;
     }
 }
 @media only screen and (min-width: 481px) and (max-width: 1023px){
     #main{
-        width: 100%;
-        font-size: 15px;
+        font-size: 20px;
     }
-    agm-map {
-        height: 70vh;
-        width: 96vw;
-    }
-    .inputs {
+    #inputs {
         padding: 10px;
         height: 18vh;
-    }
-    #randomize{
     }
     #randomize_button{
         background-color: black;
         color: white;
     }
     #logo{
-        font-size: 30px;
+        font-size: 40px;
         height: 10vh;
     }
-
+    #place {
+        padding: 10px;
+        height: 18vh;
+    }
+    #place_name{
+        font-size: 25px;
+    }
+    #place_info{
+        font-size: 20px;
+    }
+    img {
+        height: 100px !important;
+        width: 100px !important;
+        margin-right: 15px !important;
+    }
 }
 @media only screen and (min-width: 1024px){
     #main{
-        width: 100%;
-        font-size: 15px;
+        font-size: 25px;
     }
-    agm-map {
-        height: 70vh;
-        width: 96vw;
-    }
-    .inputs {
+    #inputs {
         padding: 10px;
-        height: 18vh;
-    }
-    #randomize{
+        min-height: 18vh;
     }
     #randomize_button{
         background-color: black;
         color: white;
     }
     #logo{
-        font-size: 30px;
-        height: 10vh;
+        font-size: 40px;
+        max-height: 10vh;
     }
-
+    #place {
+        padding: 10px;
+        min-height: 18vh;
+    }
+    #place_name{
+        font-size: 27px;
+    }
+    #place_info{
+        font-size: 22px;
+    }
+    img {
+        height: 125px !important;
+        width: 125px !important;
+        margin-right: 15px !important;
+    }
+}
+#main{
+    width: 100%;
+}
+#shell{
+    height: 100vh;
+    width: 100vw;
+}
+#loading {
+    font-size: 30px;
+    padding: 10px;
+}
+/* #error {
+    height: 10vh;
+    width: 10vw;
+    position: fixed;
+    top: 5vh;
+    left: 5vw;
+    color: red;
+    background-color: white;
+    border: 1px solid black;
+} */
+#map {
+    margin-left: 1vw;
+}
+agm-map {
+    height: 70vh;
+    width: 96vw;
+}
+#logo{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1vh;
 }
 button{
     border: none;
@@ -86,26 +137,6 @@ select{
     border: none;
     border-radius: 5px;
     margin-top: 5px;
-}
-
-
-#shell{
-    height: 98vh;
-    width: 98vw;
-}
-#logo{
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-}
-#place {
-
-}
-#place_name{
-    font-size: 20px;
-}
-#place_info{
-    font-size: 10px;
 }
 #go_button {
     background-color: green;

@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
 declare var google: any;
 
-
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
@@ -65,9 +64,10 @@ export class LocationComponent implements OnInit {
     this.getRandomDesign();
   }
   hideStuff(){
-    $('#map').hide();
+    $('#main').hide();
     $('#location').hide();
     $('#radius').hide();
+    $('#error').hide();
   }
   getLocation(location, marker_one){
     var x = document.getElementById("location");
@@ -84,7 +84,8 @@ export class LocationComponent implements OnInit {
       marker_one.lat = position.coords.latitude;
       marker_one.lng = position.coords.longitude;
       $('#confirm_marker').click();
-      $('#map').show();
+      $('#loading').hide();
+      $('#main').show();
     }
   }
   stopMarker($event, marker){
@@ -115,12 +116,12 @@ export class LocationComponent implements OnInit {
     $("#logo").css("font-family" , font);
     var color = this.getColor();
     $("#logo").css("color" , color);
-    $("body").css("color" , color);
-    $("body").css("font-family" , font);
-    $("body").css("border-left" , "0.5vw solid" + color);
-    $("body").css("border-right" , "0.5vw solid" + color);
-    $("body").css("border-top" , "0.5vh solid" + color);
-    $("body").css("border-bottom" , "0.5vw solid" + color);
+    $("#shell").css("color" , color);
+    $("#shell").css("font-family" , font);
+    $("#shell").css("border-left" , "0.5vw solid" + color);
+    $("#shell").css("border-right" , "0.5vw solid" + color);
+    $("#shell").css("border-top" , "0.5vh solid" + color);
+    $("#shell").css("border-bottom" , "0.5vw solid" + color);
     $("button").css("color" , color);
     this.random.color = color;
     var font_two = this.getFont();
@@ -170,7 +171,13 @@ export class LocationComponent implements OnInit {
     x.subscribe((data:any)=>{
       this.random.places =JSON.parse(data);
       console.log('places: ',  this.random.places);
-      this.getPlace();
+      console.log('places length ',  this.random.places.results.length);
+      if(this.random.places.results.length == 0){
+        $(".modal").css("position" , "flex");
+        $(".modal").css("display" , "flex");
+        $(".modal-dialog").css("margin" , "1vw");
+        // $(".modal-content").css("background-color" , "yellow");
+      }else{this.getPlace();}
     })
   }
   getPlace(){
@@ -204,6 +211,9 @@ export class LocationComponent implements OnInit {
   showButton(){
     this.input.intro = 2;
     this.getRandomDesign();
+  }
+  modalHide(){
+    $(".modal").css("display" , "none");
   }
 }
 
