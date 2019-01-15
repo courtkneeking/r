@@ -19,11 +19,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.png",
+              "src/favicon.svg",
               "src/assets"
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/style/fontawesome-free/css/all.min.css",
               "../public/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -80,7 +81,7 @@
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
+              "src/favicon.svg",
               "src/assets"
             ]
           }

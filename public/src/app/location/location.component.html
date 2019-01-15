@@ -1,18 +1,52 @@
 <body>
     <div id = "shell">
-        <div class="modal" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p class="modal-title">Please adjust your distance and try again</p>
-                        <button type="button" class="close" (click) = "modalHide()" >x</button>
-                    </div>   
-                  </div>
-                </div>
+        <div id = "topNav">
+            <h1>The Randomizer</h1>
+            <div id = "corner">
+                <a class = "icon" href="/">
+                    <i class="home fa fa-home"></i>
+                </a>
+                <a class = "popup icon">
+                    <i (click) = "bigQuestionPopup()" class="big fa fa-question">
+                        <span class="popuptext" id="bigQuestionPopup">
+                            <div>
+                                <i class="fab fa fa-home"></i>
+                                <p>Site home</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/questionMark.png"> 
+                                <p>Toggle info box</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/refresh.png"> 
+                                <p>Refresh map/reset parameters</p>
+                            </div>
+                            <div>
+                                <i class="fab fa fa-star"></i>
+                                <p>Reviews of randomized places in your city</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/review.png"> 
+                                <p>Write about your experience</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/googleMaps.png">
+                                <p>Open location in Google Maps</p>
+                            </div>
+                        </span>
+                    </i>
+                </a>
+                <a (click) = "tryAgain()" class = "icon popup">
+                    <i class="big fa fa-undo"></i>
+                </a>
+                <a (click) = "showReviewWindow()" class = "icon popup">
+                    <i class="big fab fa fa-star"></i>
+                </a>
             </div>
-        <div id = "loading">Loading...</div>
-        <div id = "main">  
-            <div *ngIf= "place.received == false">
+        </div>
+        <div id = "showInputs">
+            <div id = "popupBottom"></div>
+            <div id = "popupTop">
                 <div id = "inputs">
                     <div class="form-group">
                         <div id =  "type" class = "row">
@@ -20,156 +54,180 @@
                                 Place type: 
                             </div>
                             <div class = "col-8">
-                                <select [(ngModel)]="input.type" name = "input.type" (change) = "showRadius()">
+                                <select [(ngModel)]="input.type" name = "input.type" (change) = "getRandomDesign()">
                                     <option value="" disabled selected>select</option>
-                                    <option>bar</option>
-                                    <option>bus_station</option>
-                                    <option>bakery</option>
-                                    <option>cafe</option>
-                                    <option>clothing store</option>
-                                    <option>museum</option>
-                                    <option>park</option>
-                                    <option>restaurant</option>
-                                    <option>night_club </option>
+                                    <option value = "bar">Bar</option>
+                                    <option value = "restaurant">Restaurant</option>
+                                    <option value = "museum">Museum</option>
+                                    <option value = "park">Park</option>
+                                    <option value = "night_club">Club </option>
+                                    <option value = "bakery">Bakery</option>
+                                    <option value = "cafe">Cafe</option>
+                                    <option value = "clothing_store">Clothing Store</option>
                                 </select>
                             </div>
                         </div>
-                        <div *ngIf= "input.intro  > 0">
+                        <div>
                             <div  id = "radius" class = "row">
                                 <div class = "col">
                                     Distance: 
                                 </div>
                                 <div class = "col-8">
-                                    <input type = "number" min = "100" max = "5000" step = "100" [(ngModel)]="input.radius" name = "input.radius" (change) = "showButton()" placeholder = {{input.radius}}>
+                                    <input type = "number" min = "100" max = "5000" step = "100" [(ngModel)]="input.radius" name = "input.radius" (change) = "getRandomDesign()" placeholder = {{input.radius}}>
                                     <span style = "font-style: oblique">meters</span>
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf= "input.intro > 1">
-                            <button id = "randomize_button" (click) = "getPlaces()">
+                        <div class = "inline">
+                            <button class = "popup blackButton" (click) = "getPlaces()">
                                 Randomize
                             </button> 
                         </div>
                     </div>
                 </div>
             </div>
-            <div *ngIf= "place.received == true">
-                <div id = "place">
-                    <div class="media">
+        </div>
+        <div id = "main">  
+            <div id = "showPlace">
+                    <div id = "popupBottom"></div>
+                    <div id = "popupTop">
+                    <div *ngIf = "showReviews == false" class="media">
                         <div class="media-left">  
-                            <img class="media-object" src= {{place.icon}} alt="random_place">
+                            <img class="media-object" src= {{place.icon}} alt="nearby_{{input.type}}">
                         </div>
                         <div class="media-body">
-                            <div id="place_name">
+                            <div id="placeName">
                                 {{place.name}}
                             </div>
-                            <div id="place_info">
+                            <div *ngIf = "place.went == false" id="placeInfo">
                                 {{place.vicinity}}<br>
-                                <button id = "go_button" (click) = "getDirections()">Go</button>  <button id = "try_again_button" (click) = "tryAgain()">Try Again</button>
+                                <div class="social-icons">
+                                    <a (click) = "getDirection()" class = "icon">
+                                        <i class="fab fa fa-car"></i>
+                                    </a>
+                                    <a (click) = "tryAgain()" class = "icon">
+                                        <i class="fab fa fa-undo"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf = "place.went == true && reviewForm == false" id="placeInfo">
+                                {{place.vicinity}}<br>
+                                <div class="social-icons">
+                                    <a (click) = "addReview()" class = "icon">
+                                        <i><img src = "assets/images/reviewIcon.png"></i>
+                                    </a>
+                                    <a (click) = "getDirections()" class = "icon">
+                                        <i><img src = "assets/images/googleMaps.png"></i>
+                                    </a>
+                                    <a (click) = "tryAgain()" class = "icon">
+                                        <i class="fab fa fa-undo"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf = "reviewForm == true" id = "reviewForm">
+                                <form (submit) = "newReview()">
+                                    <div><p>How was it?</p><textarea name = "review.text" [(ngModel)]="review.text" ></textarea></div>
+                                    <div><p>By: </p><input type = "text" name = "review.user" [(ngModel)]="review.user" ></div>
+                                    <input type = "hidden" name = "review.city" [(ngModel)]="review.city">
+                                    <input type = "hidden" name = "review.place" [(ngModel)]="review.place">
+                                    <input type = "hidden" name = "review.lat" [(ngModel)]="review.lat">
+                                    <input type = "hidden" name = "review.lng" [(ngModel)]="review.lng">
+                                    <input type = "hidden" name = "review.icon" [(ngModel)]="review.icon" >
+                                    <input type = "hidden" name = "review.vicinity" [(ngModel)]="review.vicinity" >
+                                    <div><button type = "submit">submit</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf = "showReviews == true" id = "reviewWindow">
+                        <h2>Randomized Reviews<br>{{location.city}}</h2>
+                        <div *ngFor = "let r of reviews">
+                            <div class = "reviews">
+                                <img src = "{{r.icon}}">
+                                <div class = "text">
+                                    <b style = "font-variant: small-caps;">{{r.place}}</b><br>
+                                    <i>"{{r.text}}"</i><br>
+                                    by: {{r.user}}<br>
+                                </div>
+                                <button (click) = "getReviewPlace(r)">Go</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div id = "map">
-                <agm-map [latitude]= "marker_one.lat" [longitude]= "marker_one.lng" [zoom] = "map.zoom">
-                    <agm-marker (dragEnd) = "stopMarker($event, this.marker_one)" 
-                        [latitude]= "marker_one.lat" 
-                        [longitude]= "marker_one.lng" 
-                        [markerDraggable] = "marker_one.draggable"
-                        [iconUrl]= "marker_one.iconUrl">
+                <agm-map [latitude]= "map.lat" [longitude]= "map.lng" [zoom] = "map.zoom">
+                    <agm-marker 
+                        [latitude]= "locationMarker.lat" 
+                        [longitude]= "locationMarker.lng" 
+                        [iconUrl]= "locationMarker.iconUrl">
                     </agm-marker>
+                   
                     <div *ngIf= "place.received == true">
                         <agm-marker
                             [latitude]= "place.lat" 
                             [longitude]= "place.lng">
                         </agm-marker>
+                        <agm-direction [origin]="dir.origin" [destination]="dir.destination" [visible]="dir.visible"></agm-direction>
                     </div>
                 </agm-map>
             </div>
-            <p id = "location"></p>
-            <div id = "logo" >
-                <p>Randomizer</p>
+            <div class = "social-icons" id = "small" >
+                <a class = "icon popup">
+                    <i (click) = "smallquestionPopup()" class="fab fa fa-question">
+                        <span class="popuptext" id="smallquestionPopup">
+                            <div>
+                                <i class="fab fa fa-home"></i>
+                                <p>Site home</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/questionMark.png"> 
+                                <p>Toggle info box</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/refresh.png"> 
+                                <p>Refresh map/reset parameters</p>
+                            </div>
+                            <div>
+                                <i class="fab fa fa-star"></i>
+                                <p>Reviews of randomized places in your city</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/review.png"> 
+                                <p>Write about your experience</p>
+                            </div>
+                            <div>
+                                <img src = "assets/images/googleMaps.png">
+                                <p>Open location in Google Maps</p>
+                            </div>
+                        </span>
+                    </i>
+                </a>
+                <a (click) = "tryAgain()" class = "icon popup">
+                    <i class="fab fa fa-undo"></i>
+                </a>
+                <a (click) = "showReviewWindow()" class = "icon popup">
+                    <i class="fab fa fa-star"></i>
+                </a>
             </div>
         </div>
+    </div>
+    <div id = "adjustRadius" class = "modal">
+        <button (click) = "modalHide()" >x</button> 
+        <p >Please adjust your distance and try again</p>  
+    </div>
+    <div id = "loading" class = "modal">
+        <button (click) = "modalHide()" >x</button>
+        <p>Loading...</p>
+        <a (click) = "tryAgain()" >
+            <i class="fa fa-undo"></i>
+        </a>
     </div>
 </body>
     
 
 
+    
 
 
-<!-- <body>
-    <div id = "shell">
-        <div id = "main">  
-            <div *ngIf= "place.received == false">
-                <div id = "inputs">
-                    <div id =  "type">
-                        <div class="form-group">
-                            Place type: 
-                            <select [(ngModel)]="input.type" name = "input.type" (change) = "showRadius()">
-                                    <option value="" disabled selected>select</option>
-                                    <option>bar</option>
-                                    <option>bus_station</option>
-                                    <option>bakery</option>
-                                    <option>cafe</option>
-                                    <option>clothing store</option>
-                                    <option>museum</option>
-                                    <option>park</option>
-                                    <option>restaurant</option>
-                                    <option>night_club </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div *ngIf= "input.intro  > 0">
-                        <div  id = "radius">
-                            <div class="form-group">
-                                Distance: 
-                                <input type = "number" min = "100" max = "5000" step = "100" [(ngModel)]="input.radius" name = "input.radius" (change) = "showButton()" placeholder = {{input.radius}}>
-                                <span style = "font-style: oblique">meters</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id = "randomize" *ngIf= "input.intro > 1">
-                    <button id = "randomize_button" (click) = "getPlaces()">
-                        Randomize
-                    </button> 
-                </div>
-            </div>
-            <div *ngIf= "place.received == true">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                        <img class="media-object" src= {{place.icon}} alt="...">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">{{place.name}}</h4>
-                          {{place.vicinity}}<br>
-                        <button id = "go_button" (click) = "getDirections()">Go</button>  <button id = "try_again_button" (click) = "tryAgain()">Try Again</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <agm-map [latitude]= "marker_one.lat" [longitude]= "marker_one.lng" [zoom] = "map.zoom">
-            <agm-marker (dragEnd) = "stopMarker($event, this.marker_one)" 
-                [latitude]= "marker_one.lat" 
-                [longitude]= "marker_one.lng" 
-                [markerDraggable] = "marker_one.draggable"
-                [iconUrl]= "marker_one.iconUrl">
-            </agm-marker>
-            <div *ngIf= "place.received == true">
-                <agm-marker
-                    [latitude]= "place.lat" 
-                    [longitude]= "place.lng">
-                </agm-marker>
-            </div>
-            </agm-map>
-        <p id = "location"></p>
-        <div id = "title" >Randomizer</div>
-    </div>
-</body> -->
 
-
-   

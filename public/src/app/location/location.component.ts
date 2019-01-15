@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from './../http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
-declare var google: any;
+import { Title, Meta } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-location',
@@ -15,7 +16,8 @@ export class LocationComponent implements OnInit {
   data: any;
   location: any = {
     lat: '', 
-    lng: ''
+    lng: '',
+    city: ''
   };
   random: any = {
     color: '',
@@ -29,7 +31,7 @@ export class LocationComponent implements OnInit {
     hour: '',
     string: '',
   };
-  marker_one: any = {
+  locationMarker: any = {
     lat: '', 
     lng: '', 
     draggable: true, 
@@ -37,11 +39,12 @@ export class LocationComponent implements OnInit {
     iconUrl: 'assets/images/person_icon.png'
   };
   map: any = {
-    zoom: 16
+    zoom: 16,
+    lat: 0,
+    lng: 0,
   };
   input: any = {
-    intro: 0,
-    radius: '',
+    radius: 0,
     type: '',
   }
   place: any = {
@@ -49,73 +52,92 @@ export class LocationComponent implements OnInit {
     lat: '',
     lng: '',
     name: '',
-    rating: '',
-    open: '',
     vicinity: '',
     icon: '',
-    photo: ''
+    rating: '',
+    open: '',
+    photo: '', 
+    price_level: '',
+    went: false,
+  };
+  origin: any;
+  destination: any;
+  dir: any = {
+    visible : true,
+    origin: '',
+    destination: '',
   }
-  constructor(private _httpService: HttpService, private _route: ActivatedRoute, private _router: Router) {
+  showReviews: boolean = false;
+  reviewForm: boolean = false;
+  reviews;
+  review : any = {
+    user: '',
+    text: '',
+    city: '',
+    place: '',
+    vicinity: '',
+    lat: '',
+    lng: '',
+    icon: ''
+  };
+  
+
+
+  
+  constructor(private _httpService: HttpService, private _route: ActivatedRoute, private _router: Router, private meta: Meta, private title: Title) {
     this.data = [];
+    this.reviews = [];
+    this.review = {user: '', text: '', city: '', place: '', lat: '', lng: '', icon: '', vicinity: ''};
+    this.title.setTitle('Randomizer | Find something to do in your area');  
+    this.meta.updateTag({name:'description',content:"The randomizer takes in your current location and specified parameters to give a random place in your area. Connect, review and enjoy totally random restaurants, bars, and more."});   
+    this.meta.updateTag({name:'keyword',content:'places, random, find, fun, good restaurants, bars, reviews'});   
    }
   ngOnInit() {
-    this.hideStuff();
-    this.getLocation(this.location, this.marker_one);
     this.getRandomDesign();
+    this.hideStuff();
+    this.findLocation();
+    $('#showInputs').show();
+    $('#showPlace').hide();
+    $('#reviews').hide();
+  }
+  findLocation(){
+    let obs = this._httpService.giveLocation();
+    this.location = obs;
+    this.map.lat = this.location.lat;
+    this.map.lng = this.location.lng;
+    this.locationMarker.lat = this.location.lat;
+    this.locationMarker.lng = this.location.lng;
+    $('#loading').hide();
+    $('#main').show();
+    if(this.location.lat != ''){
+      this.getCity();
+    }else{
+      $('#loading').show();
+      setTimeout(()=>{ this.resetParameters()}, 3000);
+    }
+  }
+  getCity(){
+    var key = "&key=AIzaSyBz3URWxKvUHyX1N9k3RW5XkxEuyv0v62E";
+    var location = "latlng="+this.locationMarker.lat+","+this.locationMarker.lng;
+    var url = location+key;
+    var x = this._httpService.getCity(url);
+    x.subscribe((data:any)=>{
+      var city =JSON.parse(data);
+      this.location.city = city.results[0].address_components[2].long_name;
+      console.log('location' , this.location);
+    });
   }
   hideStuff(){
     $('#main').hide();
     $('#location').hide();
-    $('#radius').hide();
     $('#error').hide();
   }
-  getLocation(location, marker_one){
-    var x = document.getElementById("location");
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(geoSuccess);
-      } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-    function geoSuccess(position) {
-      x.innerHTML = "Latitude: " + position.coords.latitude + 
-      ", Longitude: " + position.coords.longitude;
-      location.lat = position.coords.latitude;
-      location.lng = position.coords.longitude;
-      marker_one.lat = position.coords.latitude;
-      marker_one.lng = position.coords.longitude;
-      $('#confirm_marker').click();
-      $('#loading').hide();
-      $('#main').show();
-    }
-  }
-  stopMarker($event, marker){
-    marker.lat = $event.coords.lat;
-    marker.lng = $event.coords.lng;
-    console.log($event.coords.lng)
-  }
-  confirmMarker(marker){
-    var geocoder = new google.maps.Geocoder();
-    var latLng = new google.maps.LatLng(marker.lat, marker.lng);
-      if (geocoder) {
-        geocoder.geocode({ 'latLng': latLng}, function (results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            marker.street = results[0].address_components[1].long_name;
-            console.log(marker.street)
-          }
-      })
-    }
-    marker.draggable = false; 
-  }
-  changeMarker(marker){
-    this.map.zoom = 6;
-    marker.draggable = true;
-  }
-
   getRandomDesign(){
     var font = this.getFont();
-    $("#logo").css("font-family" , font);
+    $("h1").css("font-family" , font);
     var color = this.getColor();
-    $("#logo").css("color" , color);
+    $("h1").css("color" , color);
+    $(".icon").css("color" , color);
     $("#shell").css("color" , color);
     $("#shell").css("font-family" , font);
     $("#shell").css("border-left" , "0.5vw solid" + color);
@@ -123,17 +145,20 @@ export class LocationComponent implements OnInit {
     $("#shell").css("border-top" , "0.5vh solid" + color);
     $("#shell").css("border-bottom" , "0.5vw solid" + color);
     $("button").css("color" , color);
+    $(".big").css("border-right" , "0.5px solid" + color);
+    $(".home").css("border-right" , "0.5px solid" + color);
+    $('#reviewWindow').css("background-color", color);
     this.random.color = color;
     var font_two = this.getFont();
     $("#main").css("font-family" , font_two);
     var color_two = this.getColor();
-    $("#main").css("background-color" , color_two);
-    $("#logo").css("background-color" , color_two);
+    // $("h1").css("background-color" , color_two);
     $("#shell").css("background-color" , color_two);
+    $("a").css("background-color" , color_two);
     var font_three = this.getFont();
     var color_three = this.getColor();
     $("option").css("color" , color_three);
-    $("option").css("font" , font_three);
+    $("option").css("font-family" , font_three);
   }
   getFont(){
     var fonts = [
@@ -160,60 +185,137 @@ export class LocationComponent implements OnInit {
     }
     return color;
   }
-
   getPlaces(){
     var key = "&key=AIzaSyCCDOMuoRJs6evSFsAs0JXrWY4Mt3mZCYk";
-    var location = "location="+this.marker_one.lat+","+this.marker_one.lng; 
+    var location = "location="+this.locationMarker.lat+","+this.locationMarker.lng; 
     var radius = "&radius="+this.input.radius;
     var type = "&types="+this.input.type;
     this.random.url = location+radius+type+key;
     var x = this._httpService.getPlaces(this.random.url)
     x.subscribe((data:any)=>{
       this.random.places =JSON.parse(data);
-      console.log('places: ',  this.random.places);
-      console.log('places length ',  this.random.places.results.length);
       if(this.random.places.results.length == 0){
-        $(".modal").css("position" , "flex");
-        $(".modal").css("display" , "flex");
-        $(".modal-dialog").css("margin" , "1vw");
-        // $(".modal-content").css("background-color" , "yellow");
+        $('#adjustRadius').show();
       }else{this.getPlace();}
-    })
+    });
+    this.getRandomDesign();
   }
   getPlace(){
     var number = this.random.places.results.length;
     var random = Math.floor((Math.random() * number));
     var place = this.random.places.results[random];
+    console.log('place', place)
     this.place.received = true;
     this.place.name = place.name;
     this.place.icon = place.icon;
     this.place.lat = place.geometry.location.lat;
     this.place.lng = place.geometry.location.lng;
+    this.place.price_level = place.price_level;
     this.place.vicinity = place.vicinity;
-    this.place.rating = place.rating;    
     this.map.zoom = 12;
-    console.log('map zoom:', this.map.zoom)
+    console.log('this.place,' , this.place)
+    $('#showInputs').hide();
+    $('#showPlace').show();
   }
-  tryAgain(){
-    this.place.received = false;
+  getReviewPlace(review){
+    this.place.received = true;
+    this.place.name = review.place;
+    this.place.icon = review.icon;
+    this.place.lat = review.lat;
+    this.place.lng = review.lng;
+    this.place.vicinity = review.vicinity;
+    this.map.zoom = 12;
+    console.log('this.place,' , this.place);
+    $('#showInputs').hide();
+    $('#showPlace').show();
+    this.showReviews = false;
+  }
+  getDirection() {
+    this.dir.origin = { lat: this.location.lat, lng: this.location.lng };
+    this.dir.destination = { lat: this.place.lat, lng: this.place.lng };
+    this.dir.visible = true;
+    this.place.went = true;
     this.getRandomDesign();
-    this.input.intro= 0,
-    this.input.radius= 0,
-    this.input.type= ''
+  }
+
+  tryAgain(){
+    this.removeDirection();
+    $('#showPlace').hide();
+    $('#showInputs').show();
+    this.place.lat = 0;
+    this.place.lng = 0;
+    this.resetParameters();
   }
   getDirections(){
-    window.location.href = 'https://www.google.com/maps/dir/?api=1&origin='+this.marker_one.lat+','+this.marker_one.lng+'&destination='+this.place.lat+','+this.place.lng+'&travelmode=walking';
+    window.location.href = 'https://www.google.com/maps/dir/?api=1&origin='+this.locationMarker.lat+','+this.locationMarker.lng+'&destination='+this.place.lat+','+this.place.lng+'&travelmode=walking';
   }
-  showRadius(){
-    this.input.intro = 1;
+  resetParameters(){
+    $('#showPlace').hide();
+    $('#showInputs').show();
+    this.hideStuff();
+    this.findLocation();
+    this.input.radius = 0;
+    this.input.type = '';
+    this.input.intro = 0;
+    this.place.went = false;
+    this.reviewForm = false;
+    this.showReviews = false;
     this.getRandomDesign();
   }
-  showButton(){
-    this.input.intro = 2;
-    this.getRandomDesign();
+  smallquestionPopup(){
+    var s = 'smallquestionPopup'
+    var popup = document.getElementById(s);
+    popup.classList.toggle("show");
+  
+  }
+  bigQuestionPopup(){
+    var b = 'bigQuestionPopup'
+    var popup = document.getElementById(b);
+    popup.classList.toggle("show");
+  }
+  loadingPopup(){
+    var l = 'loadingPopup'
+    var popup = document.getElementById(l);
+    popup.classList.toggle("show");
+  } 
+  addReview(){
+    this.reviewForm = true;
+    this.review.city = this.location.city;
+    this.review.place = this.place.name;
+    this.review.icon = this.place.icon;
+    this.review.lat = this.place.lat;
+    this.review.lng = this.place.lng;
+    this.review.vicinity = this.place.vicinity;
+  }
+  newReview(){
+    this.removeDirection();
+    this.place.lat = 0;
+    this.place.lng = 0;
+    let obs = this._httpService.addReview(this.review);
+    obs.subscribe(data=>{
+      this.review = {user: '', text: '', place: '', city: '', icon: '', lat: '', lng: '', vicinity: ''};
+      this.showReviewWindow();
+    });
+  }
+  getReviews(){
+    let obs = this._httpService.getReviews(this.location.city);
+    obs.subscribe(data=>{
+      this.reviews = data;
+    });
+  }
+  showReviewWindow(){
+    $('#showInputs').hide();
+    $('#showPlace').show();
+    this.place.went = false;
+    this.reviewForm = false;
+    this.showReviews = true;
+    this.getReviews();
   }
   modalHide(){
     $(".modal").css("display" , "none");
+  }
+  removeDirection(){
+    this.dir.visible = false;
   }
 }
 

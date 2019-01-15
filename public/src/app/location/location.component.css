@@ -1,153 +1,738 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 @media only screen and (max-width: 480px){
-    #main{
+    .big {
+        display: none;
+    }
+    #small a{
+        padding: 1vh 15vw 0 15vw !important;
+    }
+    #topNav{
+        height: 10vh;
+        width: 100vw;
+        padding: 2vw 0 0 0;
+    }
+    h1{
+        font-size: 20px;
+        height: 8vh;
+        margin-top: 2vh;
+        margin-left: 25vw;
+        margin-right: 15vw;
+        display: inline-block;
+        width: 50vw;
+    }
+    #corner {
+        display: inline-block;
+        width: 5vw;
+    }
+    .home{
+        border: none !important; 
+    }
+    .social-icons a {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        border-radius: 100%;
+        text-align: center;
         font-size: 15px;
+        padding: 5px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+    i img {
+        height: 20px !important;
+        width: 20px !important;
+    }
+    #smallquestionPopup{
+        font-size: 10px;
+        margin-left: -80px;
+        bottom: 20vh;  
+        left: 40vw;
+        width: 60vw;
+        overflow: scroll;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+        background-color: white;
+        opacity: 0.8;
     }
     #inputs {
         padding: 10px;
         height: 18vh;
     }
-    #randomize_button{
-        background-color: black;
-        color: white;
+    #radius input {
+        padding: 0 1vw;
     }
-    #logo{
-        font-size: 30px;
-        height: 10vh;
+    .blackButton{
+        background-color: black;
+        color: white !important;
+        padding: 5px;
     }
     #place {
         padding: 10px;
         height: 18vh;
     }
-    #place_name{
-        font-size: 20px;
+    #placeName{
+        font-size: 18px;
     }
-    #place_info{
+    #placeInfo{
         font-size: 10px;
+    }
+    .media-left img {
+        height: 65px !important;
+        width: 65px !important;
+        margin-right: 15px !important;
+        margin-top: 5px !important;
+        margin-left: 5px !important;
+    }
+    #main{
+        font-size: 20px;
+        width: 100%;
+    }
+    #popupBottom{
+        position: absolute;
+        height: 16vh;
+        width: 80vw;
+        margin-top: 8vh;
+        margin-left: 10vw;
+        z-index: 1;
+        opacity: 0.85;
+        background-color: white;
+        padding: 5px;
+    }
+    #popupTop{
+        position: absolute;
+        height: 16vh;
+        width: 80vw;
+        margin-top: 8vh;
+        margin-left: 10vw;
+        z-index: 2;
+        font-family: "Modern Antiqua", cursive;
+        color: black;
+        font-size: 12px;
+    }
+    #map {
+        margin-left: 1vw;
+    }
+    agm-map {
+        height: 80vh;
+        width: 96vw;
+    }
+    #reviewWindow{
+        width: 80vw;
+        height: 60vh;
+        overflow: scroll;
+        background-color: white;
+        opacity: 0.85;
+    }
+    #reviewWindow h2{
+        font-size: 15px;
+        margin-bottom: 1vh !important;
+        margin-top: 1vh !important;
+        padding-left: 10px;
+    }
+    .reviews{
+        width: 75vw;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+        padding: 5px 0;
+        margin-top: 1vh;
+        margin-left: 1vw;
+    }
+    .reviews img{
+        width: 35px;
+        height: 35px;
+        padding: 1vh;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 1vw;
+    }
+    .reviews .text{
+        width: 45vw;
+        height: 8vh;
+        display: inline-block;
+    }
+    .reviews button{
+        width: 36px;
+        height: 20px;
+        display: inline-block;
+        margin: none;
+        padding: 2px;
+        vertical-align: top;
+        background-color: black;
+        color: white;
+    }
+    #reviewForm{
+        width: 50vw;
+        padding: 2vh 5vw;
+        background-color: white;
+        opacity: 0.85;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+        margin-top: 3vh;
+    }
+    #reviewForm input{
+        border-radius: none;
+        width: 35vw;
+    }
+    #reviewForm  textarea{
+        border: 1px solid black;
+        width: 35vw;
+    }
+    #reviewForm  button{
+        background-color: black;
+        color: white;
+        padding: 3px 7px;
+    }
+    #adjustRadius{
+        font-size: 10px;
+        font-family: "Modern Antiqua", cursive;
+        padding: 5px;
+        position: absolute;
+        top: 35vh;
+        left: 20vw;
+        height: 15vh;
+        width: 60vw;
+        background-color: white;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #adjustRadius button{
+        margin-left: 90%;
+        display: block;
+        background-color: white !important;
+    }
+    #adjustRadius p{
+        padding: 1vh 2vw 0 2vw;
+        color: red;
+    }
+    #loading{
+        font-size: 15px;
+        font-family: "Modern Antiqua", cursive;
+        padding: 10px;
+        position: absolute;
+        top: 35vh;
+        left: 20vw;
+        height: 15vh;
+        width: 60vw;
+        background-color: white;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #loading button{
+        margin-left: 90%;
+        display: block;
+        background-color: white !important;
+    }
+    #loading p{
+        display: inline-block;
+        padding: 1vh 0 1vh 5vw;
+        margin-left: 5vw;
+        color: black;
+    }
+    #loading a{
+        background-color: white !important;
+        display: inline-block;
+        padding: 1vh 5vw 1vh 0;
+        margin-left: 2vw;
     }
 }
 @media only screen and (min-width: 481px) and (max-width: 1023px){
+    .big {
+        display: none;
+    }
+    #topNav{
+        height: 10vh;
+        width: 100vw;
+        padding: 2vw 0 0 0;
+    }
+    #corner {
+        display: inline-block;
+        width: 5vw;
+        font-size: 20px;
+    }
+    .home {
+        border: none !important; 
+    }
+    #small a{
+        padding: 1vh 15vw 0 15vw !important;
+    }
+    h1{
+        font-size: 20px;
+        height: 8vh;
+        margin-top: 2vh;
+        margin-left: 35vw;
+        margin-right: 15vw;
+        display: inline-block;
+        width: 38vw;
+    }
+    .social-icons a {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        border-radius: 100%;
+        text-align: center;
+        font-size: 15px;
+        padding: 5px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+    i img {
+        height: 20px !important;
+        width: 20px !important;
+    }  
+    #smallquestionPopup{
+        font-size: 10px;
+        margin-left: -80px;
+        bottom: 20vh;  
+        left: 30vw;
+        width: 50vw;
+        overflow: scroll;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+        background-color: white;
+        opacity: 0.8;
+    }
     #main{
         font-size: 20px;
+        width: 100%;
     }
     #inputs {
         padding: 10px;
         height: 18vh;
     }
-    #randomize_button{
+    #radius input {
+        padding: 0 1vw;
+    }
+    .blackButton{
         background-color: black;
         color: white;
-    }
-    #logo{
-        font-size: 40px;
-        height: 10vh;
+        padding: 5px;
     }
     #place {
         padding: 10px;
         height: 18vh;
     }
-    #place_name{
+    #placeName{
         font-size: 25px;
     }
-    #place_info{
+    #placeInfo{
         font-size: 20px;
     }
-    img {
-        height: 100px !important;
-        width: 100px !important;
+    .media-left img {
+        height: 65px !important;
+        width: 65px !important;
         margin-right: 15px !important;
+        margin-top: 5px !important;
+        margin-left: 5px !important;
     }
+    #map {
+        margin-left: 1vw;
+    }
+    agm-map {
+        height: 80vh;
+        width: 96vw;
+    }
+    #popupBottom{
+        position: absolute;
+        height: 15vh;
+        width: 80vw;
+        margin-top: 8vh;
+        margin-left: 10vw;
+        z-index: 1;
+        opacity: 0.85;
+        background-color: white;
+        padding: 5px;
+    }
+    #popupTop{
+        position: absolute;
+        height: 15vh;
+        width: 80vw;
+        margin-top: 8vh;
+        margin-left: 10vw;
+        z-index: 2;
+        font-family: "Modern Antiqua", cursive;
+        color: black;
+        font-size: 12px;
+    }  
+    #reviewForm{
+        width: 60vw;
+        height: 25vh;
+        overflow: scroll;
+        background-color: white;
+        opacity: 0.85;
+        padding: 3vh 5vw;   
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #reviewForm input{
+        border-radius: none;
+        width: 30vw;
+    }
+    #reviewForm  textarea{
+        border: 1px solid black;
+        width: 30vw;
+    }
+    #reviewForm  button{
+        background-color: black;
+        color: white;
+        padding: 3px 7px;
+    }
+    #reviewWindow{
+        width: 80vw;
+        height: 60vh;
+        overflow: scroll;
+        background-color: white;
+        opacity: 0.85;
+    }
+    #reviewWindow h2{
+        font-size: 15px;
+        margin-bottom: 1vh !important;
+        margin-top: 1vh !important;
+        padding-left: 10px;
+    }
+    .reviews{
+        width: 75vw;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+        padding: 5px 0;
+        margin-top: 1vh;
+        margin-left: 1vw;
+    }
+    .reviews img{
+        width: 55px;
+        height: 55px;
+        padding: 1vh;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 1vw;
+        margin-top: 1vh;
+    }
+    .reviews .text{
+        width: 44vw;
+        height: 7vh;
+        margin-top: 1vh;
+        margin-left: 1vw;
+        display: inline-block;
+    }
+    .reviews button{
+        width: 36px;
+        height: 20px;
+        display: inline-block;
+        margin: 2vh 0 0 0;
+        padding: 2px;
+        vertical-align: top;
+        background-color: black;
+        color: white;
+    }
+    #adjustRadius{
+        font-size: 15px;
+        font-family: "Modern Antiqua", cursive;
+        padding: 5px;
+        position: absolute;
+        top: 32vh;
+        left: 20vw;
+        height: 15vh;
+        width: 50vw;
+        background-color: white;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #adjustRadius button{
+        margin-left: 90%;
+        display: block;
+        background-color: white !important;
+        color: black !important;
+    }
+    #adjustRadius p{
+        padding: 2vh 5vw 0 5vw;
+        color: red;
+    }
+    #loading{
+        font-size: 20px;
+        font-family: "Modern Antiqua", cursive;
+        padding: 10px;
+        position: absolute;
+        top: 30vh;
+        left: 20vw;
+        height: 15vh;
+        width: 60vw;
+        background-color: white;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #loading button{
+        margin-left: 90%;
+        display: block;
+        background-color: white !important;
+    }
+    #loading p{
+        display: inline-block;
+        padding: 1vh 0 1vh 5vw;
+        margin-left: 5vw;
+        color: black;
+    }
+    #loading a{
+        background-color: white !important;
+        display: inline-block;
+        padding: 1vh 5vw 1vh 0;
+        margin-left: 2vw;
+    }
+
 }
 @media only screen and (min-width: 1024px){
+    #small {
+        display: none;
+    }
+    .big {
+        width: 10vw;
+        margin-left: 5vw;
+    }
+    #topNav{
+        height: 10vh;
+        padding-top: 2vh;
+        width: 100vw;
+    }
+    .home {
+        width: 10vw;
+        margin-left: 5vw;
+    }
+    h1{
+        font-size: 25px;
+        max-height: 10vh;
+        display: inline-block;
+        width: 28vw;
+        padding-left: 5vw;
+        position: absolute;
+        right: 1vw;
+    }
+    #corner {
+        display: inline-block;
+        /* width: 5vw; */
+        width: 65vw;
+        margin: 0 5vw;
+    }
+    .social-icons a {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        border-radius: 100%;
+        text-align: center;
+        background-color: white;
+        color: black;
+        font-size: 15px;
+        padding: 5px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+    i img {
+        height: 20px !important;
+        width: 20px !important;
+    }
+    #bigQuestionPopup{
+        font-size: 10px;
+        width: 40vw;
+        position: absolute;
+        top: 7vw;
+        left: 0;
+        height: 45vh;
+        background-color: white;
+        opacity: 0.8;
+        overflow: scroll;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
     #main{
         font-size: 25px;
+        width: 100%;
     }
     #inputs {
-        padding: 10px;
         min-height: 18vh;
     }
-    #randomize_button{
-        background-color: black;
-        color: white;
+    #type {
+        margin-bottom: 2vh;
     }
-    #logo{
-        font-size: 40px;
-        max-height: 10vh;
+    #radius {
+        margin-bottom: 2vh;
+    }
+    #radius input {
+        padding: 0 1vw;
+    }
+    .blackButton{
+        background-color: black;
+        color: white !important;
+        padding: 5px;
     }
     #place {
         padding: 10px;
         min-height: 18vh;
     }
-    #place_name{
-        font-size: 27px;
+    #placeName{
+        font-size: 18px;
     }
-    #place_info{
-        font-size: 22px;
+    #placeInfo{
+        font-size: 10px;
+        margin-top: 1vh;
     }
-    img {
-        height: 125px !important;
-        width: 125px !important;
-        margin-right: 15px !important;
+    .media-left img {
+        height: 75px !important;
+        width: 75px !important;
+        margin-right: 2vw !important;
     }
-}
-#main{
-    width: 100%;
+    #map {
+        margin-left: 0.5vw;
+    }
+    agm-map {
+        height: 88vh;
+        width: 70vw;
+    }
+    #popupBottom{
+        position: absolute;
+        height: 88vh;
+        width: 27.5vw;
+        right: 1vw;
+        top: 10.5vh;
+        z-index: 1;
+        opacity: 0.85;
+        padding: 10vh 1.5vw;
+        background-color: white;
+    }
+    #popupTop{
+        position: absolute;
+        height: 88vh;
+        width: 27.5vw;
+        right: 1vw;
+        top: 10.5vh;
+        padding: 10vh 1.5vw;
+        z-index: 2;
+        font-family: "Modern Antiqua", cursive;
+        color: black;
+        font-size: 12px;
+    }
+    #reviewWindow{
+        width: 30vw;
+        height: 60vh;
+        overflow: scroll;
+    }
+    #reviewWindow h2{
+        font-size: 15px;
+        margin-bottom: 1vh !important;
+        padding-left: 40px;
+    }
+    .reviews{
+        padding: 5px 0;
+        width: 25vw;
+        margin-top: 1vh;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    .reviews img{
+        width: 40px;
+        height: 40px;
+        padding: 1vh;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 1vw;
+    }
+    .reviews .text{
+        width: 14vw;
+        height: 8vh;
+        display: inline-block;
+        overflow: scroll;
+    }
+    .reviews button{
+        width: 36px;
+        height: 20px;
+        display: inline-block;
+        margin: none;
+        padding: 2px;
+        vertical-align: top;
+        background-color: black;
+        color: white;
+    }
+    #reviewForm input{
+        border-radius: none;
+    }
+    #reviewForm  textarea{
+        border: 1px solid black;
+    }
+    #reviewForm  button{
+        background-color: black;
+        color: white;
+        padding: 3px 7px;
+    }
+    #adjustRadius{
+        font-size: 15px;
+        font-family: "Modern Antiqua", cursive;
+        padding: 10px;
+        position: absolute;
+        top: 20vh;
+        left: 20vw;
+        height: 20vh;
+        width: 30vw;
+        background-color: white;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #adjustRadius button{
+        margin-left: 90%;
+        display: block;
+    }
+    #adjustRadius p{
+        padding: 3vh 2vw 0 2vw;
+        color: red !important;
+    }
+    #loading{
+        font-size: 25px;
+        font-family: "Modern Antiqua", cursive;
+        padding: 10px;
+        position: absolute;
+        top: 20vh;
+        left: 20vw;
+        height: 20vh;
+        width: 30vw;
+        background-color: white;
+        border: 0.5px solid lightgray ;
+        box-shadow: 1px 1px #888888 ;
+    }
+    #loading button{
+        margin-left: 90%;
+        display: block;
+    }
+    #loading p{
+        display: inline-block;
+        padding: 2vh 0 0 4vw;
+        margin-left: 5vw;
+        color: black;
+    }
+    #loading a{
+        background-color: white !important;
+        display: inline-block;
+        padding: 1vh 5vw 1vh 0;
+        margin-left: 2vw;
+    }
 }
 #shell{
     height: 100vh;
     width: 100vw;
 }
-#loading {
-    font-size: 30px;
-    padding: 10px;
-}
-/* #error {
-    height: 10vh;
-    width: 10vw;
-    position: fixed;
-    top: 5vh;
-    left: 5vw;
-    color: red;
-    background-color: white;
+input{
+    border-radius: 5px;
     border: 1px solid black;
-} */
-#map {
-    margin-left: 1vw;
+    margin-top: 5px;
 }
-agm-map {
-    height: 70vh;
-    width: 96vw;
-}
-#logo{
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 1vh;
+select{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: white !important;
 }
 button{
     border: none;
     border-radius: 5px;
     margin-top: 5px;
 }
-input{
-    border-radius: 5px;
-    border: none;
-    margin-top: 5px;
-}
-select{
-    border: none;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-#go_button {
-    background-color: green;
-    color: white;
-}
-#try_again_button {
-    margin-left: 5%;
-    background-color: yellow;
-    color: white;
-}
-
 select:focus{
     outline:none !important;
 }
@@ -157,81 +742,68 @@ input:focus{
 button:focus{
     outline:none !important;
 }
-
-
-.swing-in-left-bck {
-	-webkit-animation: swing-in-left-bck 0.6s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-	        animation: swing-in-left-bck 0.6s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-    }
-  @-webkit-keyframes swing-in-left-bck {
-    0% {
-      -webkit-transform: rotateY(-70deg);
-              transform: rotateY(-70deg);
-      -webkit-transform-origin: left;
-              transform-origin: left;
-      opacity: 0;
-    }
-    100% {
-      -webkit-transform: rotateY(0);
-              transform: rotateY(0);
-      -webkit-transform-origin: left;
-              transform-origin: left;
-      opacity: 1;
-    }
-  }
-  @keyframes swing-in-left-bck {
-    0% {
-      -webkit-transform: rotateY(-70deg);
-              transform: rotateY(-70deg);
-      -webkit-transform-origin: left;
-              transform-origin: left;
-      opacity: 0;
-    }
-    100% {
-      -webkit-transform: rotateY(0);
-              transform: rotateY(0);
-      -webkit-transform-origin: left;
-              transform-origin: left;
-      opacity: 1;
-    }
-  }
-  .swing-in-right-bck {
-	-webkit-animation: swing-in-right-bck 0.6s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-	        animation: swing-in-right-bck 0.6s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
-    }
-
-  @-webkit-keyframes swing-in-right-bck {
-    0% {
-      -webkit-transform: rotateY(70deg);
-              transform: rotateY(70deg);
-      -webkit-transform-origin: right;
-              transform-origin: right;
-      opacity: 0;
-    }
-    100% {
-      -webkit-transform: rotateY(0);
-              transform: rotateY(0);
-      -webkit-transform-origin: right;
-              transform-origin: right;
-      opacity: 1;
-    }
-  }
-  @keyframes swing-in-right-bck {
-    0% {
-      -webkit-transform: rotateY(70deg);
-              transform: rotateY(70deg);
-      -webkit-transform-origin: right;
-              transform-origin: right;
-      opacity: 0;
-    }
-    100% {
-      -webkit-transform: rotateY(0);
-              transform: rotateY(0);
-      -webkit-transform-origin: right;
-              transform-origin: right;
-      opacity: 1;
-    }
-  }
+/* base popup */ 
+.popup .popuptext {
+    visibility: hidden;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 4px;
+    position: absolute;
+    z-index: 1;
+    font-family: "Modern Antiqua", cursive;
+    font-weight: normal;
+    line-height: 1.2;
+} 
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* base popup */ 
+/* individual popups */ 
+#smallquestionPopup div{
+    height: 6vh;
+    width: 55vw;
+    padding: 1vh 1vw;
+}
+#smallquestionPopup p{
+    display: inline-block;
+    width: 40vw;
+    text-align: left;
+    margin-left: 3vw;
+}
+#smallquestionPopup img{
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+#bigQuestionPopup div{
+    height: 6vh;
+    width: 55vw;
+    padding: 1vh 1vw;
+}
+#bigQuestionPopup p{
+    display: inline-block;
+    width: 40vw;
+    text-align: left;
+    margin-left: 3vw;
+}
+#bigQuestionPopup img{
+    margin: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+/* individual popups */ 
 
 
 

@@ -11,10 +11,14 @@ import { HttpService } from './http.service';
 import { AgmCoreModule } from '@agm/core';
 import { LocationComponent } from './location/location.component';
 
+import { AgmDirectionModule } from 'agm-direction';
+import { HomeComponent } from './home/home.component' 
+
 @NgModule({
   declarations: [
     AppComponent,
-    LocationComponent
+    LocationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,8 @@ import { LocationComponent } from './location/location.component';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBz3URWxKvUHyX1N9k3RW5XkxEuyv0v62E'
-    })
+    }),
+    AgmDirectionModule,
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
