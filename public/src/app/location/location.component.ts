@@ -164,10 +164,8 @@ export class LocationComponent implements OnInit {
     var fonts = [
       'Pacifico', 
       'Oswald', 
-      'Titan One', 
       'Lobster',
       'Roboto', 
-      'Black Han Sans', 
       'Abril Fatface',
       "'Indie Flower', cursive",
       "'Noto Serif',serif",

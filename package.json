@@ -1,13 +1,18 @@
 {
-  "name": "parking",
+  "name": "random",
   "version": "1.0.0",
-  "description": "",
+  "description": "get a random place in your area",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "place",
+    "random",
+    "fun",
+    "randomizer"
+  ],
+  "author": "Courtney King",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",

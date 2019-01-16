@@ -1,20 +1,24 @@
 <div id = "shell">
-    <div id = "top_bar" ></div>
+    <div id = "topNav" >
+        <div id = "corner">
+            <a (click) = "showBlocks('logo')" class = "icon" href="/">
+                <i class="fab fa fa-home"></i>
+            </a>
+        </div>
+    </div>
     <div id = "main">
-        <div *ngIf = "show.logo == true" >
-            <div id = "logo">
+        <div *ngIf = "show.logo == true" id = "logo">
                 Randomizer
-            </div>
         </div>
         <div *ngIf = "show.question == true" class = "blockInfo">
             Click on the arrow to begin. Next, select the place type and desired distance you wish you travel. The randomizer will then return a random place to you using your desired inputs.
         </div> 
         <div *ngIf = "show.about == true" class = "blockInfo">
-            Built using Angular. Last updated January 13, 2019.
+            Last updated January 13, 2019.
         </div>
-        <div *ngIf = "show.reviews == true" class = "blockInfo">
-            Random Reviews in Your Area<br>
-            Add a little something about your random experience! 
+        <div *ngIf = "show.faqs == true" class = "blockInfo">
+            FAQs<br>
+            Coming soon... 
         </div> 
         <div *ngIf = "show.privacy == true" class = "blockInfo">
             This site collects encrypted information about your location, purely for the site's functionality. Your location, nor any other personal information, is kept after you leave the website. We do not use cookies.
@@ -24,8 +28,9 @@
             courtneyshmourtney@gmail.com<br>
             Las Vegas, NV<br>
         </div> 
- 
-        <div class="social-icons">
+    </div>
+    <div id = "Icons">
+        <div class="social-icons middle">
             <a (click) = "showBlocks('question')" class = "icon">
                 <i class="fab fa fa-question"></i>
             </a>
@@ -34,19 +39,12 @@
             </a>
         </div>
     </div>
-    <div id = "bottom_bar" >
+    <div id = "bottomNav" >
         <div (click) = "showBlocks('about')" class = "blocks">About</div>
-        <div (click) = "showBlocks('reviews')" class = "blocks">Random Reviews</div>
+        <div (click) = "showBlocks('faqs')" class = "blocks">FAQs</div>
         <div (click) = "showBlocks('privacy')" class = "blocks">Privacy Policy</div>
         <div (click) = "showBlocks('contact')" class = "blocks">Contact</div>
     </div> 
 </div>
   
-
-
-
-
-
-
- 
 

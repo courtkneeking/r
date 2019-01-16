@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   show: any = {
     logo: true,
     about: false,
-    reviews: false,
+    faqs: false,
     privacy: false,
     contact: false, 
     question: false
@@ -49,11 +49,12 @@ export class HomeComponent implements OnInit {
     function geoSuccess(position) {
       location.lat = position.coords.latitude;
       location.lng = position.coords.longitude;
+      console.log('getLocation()', location)
     }
   }
 
   giveLocation(location){
-    var x = this._httpService.saveLocation(location); 
+    this._httpService.saveLocation(location); 
     this._router.navigate(['place']);
   }
   showBlocks(block){
@@ -61,7 +62,7 @@ export class HomeComponent implements OnInit {
     this.show.logo = false;
     this.show.about = false;
     this.show.contact = false;
-    this.show.reviews = false;
+    this.show.faqs = false;
     this.show.privacy = false;
     this.show.question = false;
     if(block == "question"){
@@ -73,17 +74,21 @@ export class HomeComponent implements OnInit {
     if(block == "contact"){
       this.show.contact = true;
     }
-    if(block == "reviews"){
-      this.show.reviews = true;
+    if(block == "faqs"){
+      this.show.faqs = true;
     }
     if(block == "privacy"){
       this.show.privacy = true;
+    }
+    if(block == "logo"){
+      this.show.logo = true;
     }
   }
   getRandomDesign(){
     var font = this.getFont();
     var color = this.getColor();
     $(".icon").css("background-color" , color);
+    $(".icon").css("color" , color);
     $("#shell").css("border-left" , "0.5vw solid" + color);
     $("#shell").css("border-right" , "0.5vw solid" + color);
     $("#shell").css("border-top" , "0.5vh solid" + color);
@@ -96,20 +101,16 @@ export class HomeComponent implements OnInit {
     this.random.color = color;
     var color_two = this.getColor();
     $("#shell").css("background-color" , color_two);
-    $("#top_bar").css("background-color" , color_two);
-    $("#bottom_bar").css("background-color" , color_two);
+    $("#topNav").css("background-color" , color_two);
+    $("#bottomNav").css("background-color" , color_two);
   }
   getFont(){
     var fonts = [
       'Pacifico', 
       'Oswald', 
-      'Titan One', 
       'Lobster',
       'Roboto', 
-      'Black Han Sans', 
-      'Abril Fatface',
       "'Indie Flower', cursive",
-      "'Noto Serif',serif",
       "'Modern Antiqua', cursive",
     ]
     var random = Math.floor((Math.random() * fonts.length));
