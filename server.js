@@ -9,7 +9,8 @@ const cors = require('cors');
 var request = require('request');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/random');
+// mongoose.connect('mongodb://localhost/random'); **for development, local
+mongoose.connect('mongodb://127.0.0.1:27017/random');
 
 
 app.use(bodyParser.urlencoded({extended: true}));

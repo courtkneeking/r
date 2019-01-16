@@ -26,7 +26,7 @@ import { HomeComponent } from './home/home.component'
     AppRoutingModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBz3URWxKvUHyX1N9k3RW5XkxEuyv0v62E'
+      apiKey: 'insert_key'
     }),
     AgmDirectionModule,
   ],

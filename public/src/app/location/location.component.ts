@@ -80,6 +80,7 @@ export class LocationComponent implements OnInit {
     lng: '',
     icon: ''
   };
+  key = "insert_key";
   
 
 
@@ -117,7 +118,7 @@ export class LocationComponent implements OnInit {
     }
   }
   getCity(){
-    var key = "&key=AIzaSyBz3URWxKvUHyX1N9k3RW5XkxEuyv0v62E";
+    var key = "&key="+this.key;
     var location = "latlng="+this.locationMarker.lat+","+this.locationMarker.lng;
     var url = location+key;
     var x = this._httpService.getCity(url);
@@ -184,7 +185,7 @@ export class LocationComponent implements OnInit {
     return color;
   }
   getPlaces(){
-    var key = "&key=AIzaSyCCDOMuoRJs6evSFsAs0JXrWY4Mt3mZCYk";
+    var key = "&key="+this.key;
     var location = "location="+this.locationMarker.lat+","+this.locationMarker.lng; 
     var radius = "&radius="+this.input.radius;
     var type = "&types="+this.input.type;
