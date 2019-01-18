@@ -8,17 +8,32 @@
     </div>
     <div id = "main">
         <div *ngIf = "show.logo == true" id = "logo">
-                Randomizer
+            Randomizer
         </div>
         <div *ngIf = "show.question == true" class = "blockInfo">
             Click on the arrow to begin. Next, select the place type and desired distance you wish you travel. The randomizer will then return a random place to you using your desired inputs.
         </div> 
         <div *ngIf = "show.about == true" class = "blockInfo">
-            Last updated January 13, 2019.
+            The randomizer is a free online tool that uses your current location and specified inputs to return a random place in your area. Choose from restaurants, bars, clubs and more, get directions, read reviews from other randomized locations in your area and leave your own review. Last updated Jan 18, 2019. 
         </div>
-        <div *ngIf = "show.faqs == true" class = "blockInfo">
-            FAQs<br>
-            Coming soon... 
+        <!-- <div *ngIf = "show.faqs == true" class = "blockInfo"> -->
+        <div *ngIf = "show.faqs == true" class = "faqs">
+            <h1>FAQs</h1>
+            <div class = "inputs">
+                <div class = "label">
+                    Question: 
+                </div>
+                <div class = "input">
+                    <input type = "text" name = "question.question" [(ngModel)]="question.question" >
+                </div><br>
+                <div class = "label">
+                    Email: 
+                </div>
+                <div class = "input">
+                    <input type = "text" name = "question.user" [(ngModel)]="question.user"  >
+                </div><br>
+                <button (click) = "submitQuestion()">submit</button>
+            </div>
         </div> 
         <div *ngIf = "show.privacy == true" class = "blockInfo">
             This site collects encrypted information about your location, purely for the site's functionality. Your location, nor any other personal information, is kept after you leave the website. We do not use cookies.

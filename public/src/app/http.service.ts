@@ -28,4 +28,7 @@ export class HttpService {
   getReviews(city){
     return this._http.get('/api/reviews/'+city);
   }
+  addQuestion(question){
+    return this._http.post('/api/faqs', question)
+  }
 }

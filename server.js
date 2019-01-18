@@ -29,6 +29,11 @@ var ReviewSchema = new mongoose.Schema({
     vicinity: '',
 });   
 var Review = mongoose.model('Review', ReviewSchema);
+var questionSchema = new mongoose.Schema({ 
+    user: '',
+    question: ''
+});   
+var Question = mongoose.model('Question', questionSchema);
 app.get('/city/:url', (req, res)=>{
     var url = 'https://maps.googleapis.com/maps/api/geocode/json?'+req.params.url;
     request(url, function (error, response, body) {
@@ -78,8 +83,38 @@ app.post('/api/review', (req, res) => {
         }
     })
 });
-app.get('/reviews', (req, res)=>{
+app.get('/api/faqs', (req, res) => {
+    Question.find({}, (err, questions)=>{
+        if(err){
+            res.json(err);
+        }else{
+            console.log("server get reviews",questions)
+            res.json(questions)
+        }
+    })
+});
+app.post('/api/faqs', (req, res) => {
+    var newQuestion = new Question(req.body);
+    newQuestion.save((err, newQuestion)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.json(newQuestion);
+            console.log('question', newQuestion)
+        }
+    })
+});
+app.get('/reviews/delete', (req, res)=>{
     Review.deleteMany({}, (err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/')
+        }
+    })
+});
+app.get('/questions/delete', (req, res)=>{
+    Question.deleteMany({}, (err)=>{
         if(err){
             console.log(err);
         }else{

@@ -29,10 +29,14 @@ export class HomeComponent implements OnInit {
     contact: false, 
     question: false
   }
+  question : any = {
+    user: '',
+    question: '',
+  }
   constructor(private _httpService: HttpService, private _route: ActivatedRoute, private _router: Router, private meta: Meta, private title: Title) { 
     this.title.setTitle('Randomizer | Find something to do in your area');  
     this.meta.updateTag({name:'description',content:"The randomizer takes in your current location and specified parameters to give a random place in your area. Connect, review and enjoy totally random restaurants, bars, and more."});   
-    this.meta.updateTag({name:'keyword',content:'places, random, find, good restaurants, bars, reviews'});    
+    this.meta.updateTag({name:'keywords',content:'places, random, find, good restaurants, bars, reviews'});    
   }
 
 
@@ -125,6 +129,12 @@ export class HomeComponent implements OnInit {
     }
     return color;
   }
-  question(){}
+  submitQuestion(){
+    let obs = this._httpService.addQuestion(this.question);
+    obs.subscribe(data=>{
+      this.showBlocks('logo');
+      this.question = {user: '', question: ''};
+    });
 
+  }
 }
