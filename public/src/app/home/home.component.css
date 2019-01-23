@@ -16,10 +16,6 @@
     height: 100vh;
     width: 100vw;
 }
-#bottomNav{
-    height: 4vh;
-    width: 100%; 
-}
 #bottomNav .blocks {
     display: inline-block;
     height: auto;
@@ -87,23 +83,23 @@ img {
         width: 40vw;
     }
     #Icons {
-        height: 47vh;
+        height: 32vh;
         width: 100vw;
         text-align: center;
         font-size: 25px;
         border: 1px solid transparent;
     }
     .blockInfo{
-        height: 15vh;
-        margin: 25vh 0 0 20vw;
+        height: 25vh;
+        margin: 20vh 0 5vh 20vw;
         width: 60vw;
         font-size: 12px;
         text-align: center;
         overflow: scroll;
     }
     .faqs{
-        height: 45vh;
-        max-height: 45vh;
+        height: 42vh;
+        max-height: 42vh;
         width: 90vw;
         font-size: 20px;
         margin: 3vh 0 0 5vw;
@@ -171,6 +167,11 @@ img {
     .question .q {
         text-decoration: underline;
     }
+    #bottomNav{
+        margin-top: 15vh;
+        height: 4vh;
+        width: 100%; 
+    }
 }
 @media only screen and (min-width: 481px) and (max-width: 1023px){
     #corner {
@@ -197,22 +198,22 @@ img {
         width: 40vw;
     }
     #Icons {
-        height: 45vh;
+        height: 20vh;
         width: 100vw;
         text-align: center;
         font-size: 25px;
         border: 1px solid transparent;
     }
     .blockInfo{
-        height: 20vh;
-        margin: 30vh 0 0 20vw;
+        height: 25vh;
+        margin: 20vh 0 0 20vw;
         width: 60vw;
         font-size: 20px;
         overflow: scroll;
     }
     .faqs{
-        height: 45vh;
-        max-height: 45vh;
+        height: 42vh;
+        max-height: 42vh;
         width: 90vw;
         font-size: 20px;
         margin: 3vh 0 0 5vw;
@@ -221,6 +222,7 @@ img {
     }
     .faqs h1 {
         font-size: 30px;
+        margin-top: 5vh;
     }
     .faqs .inputs {
         width: 40vw;
@@ -230,7 +232,7 @@ img {
         background-color: white !important;
         display: inline-block;
         padding: 1vh 0 0 1vw;
-        margin-top: 10vh;
+        margin-top: 5vh;
         margin-right: 0.5vw;
         text-align: left;
         vertical-align: top;
@@ -282,6 +284,11 @@ img {
     .question .q {
         text-decoration: underline;
     }
+    #bottomNav{
+        margin-top: 25vh;
+        height: 4vh;
+        width: 100%; 
+    }
 }
 @media only screen and (min-width: 1024px){
     #corner {
@@ -308,7 +315,7 @@ img {
         width: 40vw;
     }
     #Icons {
-        height: 45vh;
+        height: 35vh;
         width: 100vw;
         text-align: center;
         font-size: 25px;
@@ -316,7 +323,7 @@ img {
     }
     .blockInfo{
         height: 20vh;
-        margin: 30vh 0 0 25vw;
+        margin: 25vh 0 0 25vw;
         width: 50vw;
         font-size: 15px;
         overflow: scroll;
@@ -392,6 +399,11 @@ img {
     }
     .question .q {
         text-decoration: underline;
+    }
+    #bottomNav{
+        margin-top: 10vh;
+        height: 4vh;
+        width: 100%; 
     }
 
 

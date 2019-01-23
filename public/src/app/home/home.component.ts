@@ -21,18 +21,19 @@ export class HomeComponent implements OnInit {
     url: '',
     places: '',
   }
-  show: any = {
-    logo: true,
-    about: false,
-    faqs: false,
-    privacy: false,
-    contact: false, 
-    question: false
-  }
+  // show: any = {
+  //   logo: true,
+  //   about: false,
+  //   faqs: false,
+  //   privacy: false,
+  //   contact: false, 
+  //   question: false
+  // }
   question : any = {
     user: '',
     question: '',
   }
+  display = "logo";
   constructor(private _httpService: HttpService, private _route: ActivatedRoute, private _router: Router, private meta: Meta, private title: Title) { 
     this.title.setTitle('Randomizer | Find something to do in your area');  
     this.meta.updateTag({name:'description',content:"The randomizer takes in your current location and specified parameters to give a random place in your area. Connect, review and enjoy totally random restaurants, bars, and more."});   
@@ -61,32 +62,9 @@ export class HomeComponent implements OnInit {
     this._httpService.saveLocation(location); 
     this._router.navigate(['place']);
   }
-  showBlocks(block){
+  showDisplay(block){
     this.getRandomDesign();
-    this.show.logo = false;
-    this.show.about = false;
-    this.show.contact = false;
-    this.show.faqs = false;
-    this.show.privacy = false;
-    this.show.question = false;
-    if(block == "question"){
-      this.show.question = true;
-    }
-    if(block == "about"){
-      this.show.about = true;
-    }
-    if(block == "contact"){
-      this.show.contact = true;
-    }
-    if(block == "faqs"){
-      this.show.faqs = true;
-    }
-    if(block == "privacy"){
-      this.show.privacy = true;
-    }
-    if(block == "logo"){
-      this.show.logo = true;
-    }
+    this.display = block;
   }
   getRandomDesign(){
     var font = this.getFont();
@@ -132,7 +110,8 @@ export class HomeComponent implements OnInit {
   submitQuestion(){
     let obs = this._httpService.addQuestion(this.question);
     obs.subscribe(data=>{
-      this.showBlocks('logo');
+      // this.showBlocks('logo');
+      this.display = "logo";
       this.question = {user: '', question: ''};
     });
 

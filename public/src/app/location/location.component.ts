@@ -36,7 +36,18 @@ export class LocationComponent implements OnInit {
     lng: '', 
     draggable: true, 
     street: '',
-    iconUrl: 'assets/images/person_icon.png'
+    iconUrl : {
+      url: 'assets/images/person_icon.png',
+      scaledSize: {
+        width: 25,
+        height: 35,
+      },
+    },
+  };
+  placeMarker: any = {
+    lat: '', 
+    lng: '', 
+    visible: true
   };
   map: any = {
     zoom: 16,
@@ -80,7 +91,7 @@ export class LocationComponent implements OnInit {
     lng: '',
     icon: ''
   };
-  key = "insert_key";
+  key = "insert";
   
 
 
@@ -153,7 +164,6 @@ export class LocationComponent implements OnInit {
     var font_two = this.getFont();
     $("#main").css("font-family" , font_two);
     var color_two = this.getColor();
-    // $("h1").css("background-color" , color_two);
     $("#shell").css("background-color" , color_two);
     $("a").css("background-color" , color_two);
     var font_three = this.getFont();
@@ -209,6 +219,9 @@ export class LocationComponent implements OnInit {
     this.place.icon = place.icon;
     this.place.lat = place.geometry.location.lat;
     this.place.lng = place.geometry.location.lng;
+    this.placeMarker.lat = this.place.lat;
+    this.placeMarker.lng = this.place.lng;
+    this.placeMarker.visible = true;
     this.place.price_level = place.price_level;
     this.place.vicinity = place.vicinity;
     this.map.zoom = 12;
@@ -230,6 +243,7 @@ export class LocationComponent implements OnInit {
     this.showReviews = false;
   }
   getDirection() {
+    this.placeMarker.visible = false;
     this.dir.origin = { lat: this.location.lat, lng: this.location.lng };
     this.dir.destination = { lat: this.place.lat, lng: this.place.lng };
     this.dir.visible = true;

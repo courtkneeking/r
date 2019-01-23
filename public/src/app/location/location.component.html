@@ -165,8 +165,9 @@
                    
                     <div *ngIf= "place.received == true">
                         <agm-marker
-                            [latitude]= "place.lat" 
-                            [longitude]= "place.lng">
+                            [latitude]= "placeMarker.lat" 
+                            [longitude]= "placeMarker.lng"
+                            [visible]= "placeMarker.visible" >
                         </agm-marker>
                         <agm-direction [origin]="dir.origin" [destination]="dir.destination" [visible]="dir.visible"></agm-direction>
                     </div>

@@ -1,23 +1,22 @@
 <div id = "shell">
     <div id = "topNav" >
         <div id = "corner">
-            <a (click) = "showBlocks('logo')" class = "icon" href="/">
+            <a (click) = "showDisplay('logo')" class = "icon" href="/">
                 <i class="fab fa fa-home"></i>
             </a>
         </div>
     </div>
     <div id = "main">
-        <div *ngIf = "show.logo == true" id = "logo">
+        <div *ngIf = "display == 'logo'" id = "logo">
             Randomizer
         </div>
-        <div *ngIf = "show.question == true" class = "blockInfo">
+        <div *ngIf = "display == 'question'" class = "blockInfo">
             Click on the arrow to begin. Next, select the place type and desired distance you wish you travel. The randomizer will then return a random place to you using your desired inputs.
         </div> 
-        <div *ngIf = "show.about == true" class = "blockInfo">
+        <div *ngIf = "display == 'about'" class = "blockInfo">
             The randomizer is a free online tool that uses your current location and specified inputs to return a random place in your area. Choose from restaurants, bars, clubs and more, get directions, read reviews from other randomized locations in your area and leave your own review. Last updated Jan 18, 2019. 
         </div>
-        <!-- <div *ngIf = "show.faqs == true" class = "blockInfo"> -->
-        <div *ngIf = "show.faqs == true" class = "faqs">
+        <div *ngIf = "display == 'faqs'" class = "faqs">
             <h1>FAQs</h1>
             <div class = "inputs">
                 <div class = "label">
@@ -35,10 +34,10 @@
                 <button (click) = "submitQuestion()">submit</button>
             </div>
         </div> 
-        <div *ngIf = "show.privacy == true" class = "blockInfo">
+        <div *ngIf = "display == 'privacy'" class = "blockInfo">
             This site collects encrypted information about your location, purely for the site's functionality. Your location, nor any other personal information, is kept after you leave the website. We do not use cookies.
         </div>      
-        <div *ngIf = "show.contact == true" class = "blockInfo">
+        <div *ngIf = "display == 'contact'" class = "blockInfo">
             Courtney King<br>
             courtneyshmourtney@gmail.com<br>
             Las Vegas, NV<br>
@@ -46,7 +45,7 @@
     </div>
     <div id = "Icons">
         <div class="social-icons middle">
-            <a (click) = "showBlocks('question')" class = "icon">
+            <a (click) = "showDisplay('question')" class = "icon">
                 <i class="fab fa fa-question"></i>
             </a>
             <a (click) = "giveLocation(location)" class = "icon" >
@@ -55,10 +54,10 @@
         </div>
     </div>
     <div id = "bottomNav" >
-        <div (click) = "showBlocks('about')" class = "blocks">About</div>
-        <div (click) = "showBlocks('faqs')" class = "blocks">FAQs</div>
-        <div (click) = "showBlocks('privacy')" class = "blocks">Privacy Policy</div>
-        <div (click) = "showBlocks('contact')" class = "blocks">Contact</div>
+        <div (click) = "showDisplay('about')" class = "blocks">About</div>
+        <div (click) = "showDisplay('faqs')" class = "blocks">FAQs</div>
+        <div (click) = "showDisplay('privacy')" class = "blocks">Privacy Policy</div>
+        <div (click) = "showDisplay('contact')" class = "blocks">Contact</div>
     </div> 
 </div>
   
