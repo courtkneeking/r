@@ -91,7 +91,7 @@ export class LocationComponent implements OnInit {
     lng: '',
     icon: ''
   };
-  key = "insert";
+  key = "AIzaSyBz3URWxKvUHyX1N9k3RW5XkxEuyv0v62E";
   
 
 
@@ -197,7 +197,8 @@ export class LocationComponent implements OnInit {
   getPlaces(){
     var key = "&key="+this.key;
     var location = "location="+this.locationMarker.lat+","+this.locationMarker.lng; 
-    var radius = "&radius="+this.input.radius;
+    var radius = "&radius="+this.input.radius*1609;
+
     var type = "&types="+this.input.type;
     this.random.url = location+radius+type+key;
     var x = this._httpService.getPlaces(this.random.url)

@@ -73,8 +73,8 @@
                                     Distance: 
                                 </div>
                                 <div class = "col-8">
-                                    <input type = "number" min = "100" max = "5000" step = "100" [(ngModel)]="input.radius" name = "input.radius" (change) = "getRandomDesign()" placeholder = {{input.radius}}>
-                                    <span style = "font-style: oblique">meters</span>
+                                    <input type = "number" min = "0.5" max = "5" step = "0.25" [(ngModel)]="input.radius" name = "input.radius" (change) = "getRandomDesign()" placeholder = {{input.radius}}>
+                                    <span style = "font-style: oblique">miles</span>
                                 </div>
                             </div>
                         </div>
@@ -219,8 +219,8 @@
     </div>
     <div id = "loading" class = "modal">
         <button (click) = "modalHide()" >x</button>
-        <p>Loading...</p>
-        <a (click) = "tryAgain()" >
+        <p style = "font-size:10px;" >Location services must be<br> enabled in your browser <br>for site's functionality.</p>
+        <a href = "/" >
             <i class="fa fa-undo"></i>
         </a>
     </div>
